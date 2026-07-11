@@ -4,14 +4,23 @@ Source for HeyGen's HyperFrames launch videos. Each subdirectory is a standalone
 
 ## Videos
 
-| Launch | Directory | Notes |
+| Launch | Directory | Public video |
 | --- | --- | --- |
-| HyperFrames launch | [`hyperframes-launch/`](./hyperframes-launch) | The original announcement video. |
-| Website → HyperFrames demo | [`website-to-hyperframes/`](./website-to-hyperframes) | Capture any site, generate a video from it. |
-| Timeline editor launch | [`timeline-launch/`](./timeline-launch) | HyperFrames timeline editor reveal. |
-| Variables launch | [`variables-launch/`](./variables-launch) | HyperFrames variables / template-parameters reveal. |
-| Cloud Render launch | [`cloud-render-launch/`](./cloud-render-launch) | Managed HeyGen Cloud Render announcement video. |
-| Figma integration launch | [`figma-launch/`](./figma-launch) | Figma → HyperFrames integration launch film. |
+| HF HeyGen × Stripe | [`HF-heygen-stripe/`](./HF-heygen-stripe) | [Watch](https://hyperframes.dev/viewer/d6f7d40f-1e32-4b73-a551-af47cc19e8a2) |
+| Claude paper launch | [`claude-paper-launch/`](./claude-paper-launch) | [Watch](https://hyperframes.dev/viewer/659498ab-d77e-48a8-a719-dd97adbbd3e5) |
+| Cloud Render launch | [`cloud-render-launch/`](./cloud-render-launch) | [Watch](https://hyperframes.dev/viewer/4259dc01-157a-4966-9c58-4e97faa2548e) |
+| Figma integration launch | [`figma-launch/`](./figma-launch) | [Watch](https://hyperframes.dev/viewer/58fdce81-6ef0-4860-899d-d6b3da692a54) |
+| Frame.md storyboard launch | [`frame-md-launch-storyboard/`](./frame-md-launch-storyboard) | [Watch](https://hyperframes.dev/viewer/c5198458-4eaa-4933-a4e8-029c8010a845) |
+| HyperFrames launch | [`hyperframes-launch/`](./hyperframes-launch) | [Watch](https://hyperframes.dev/viewer/9ab8d480-7507-4905-9222-ae6ea4b2fb5a) |
+| Inspector launch | [`inspector-launch/`](./inspector-launch) | [Watch](https://hyperframes.dev/viewer/87889a4c-cc67-4e4a-b576-b57dd892fee3) |
+| PR-to-video launch | [`pr-to-video-launch/`](./pr-to-video-launch) | [Watch](https://hyperframes.dev/viewer/72c9b502-0c96-4bde-9a78-9a178267c475) |
+| SFX music launch | [`sfx-music-launch/`](./sfx-music-launch) | [Watch](https://hyperframes.dev/viewer/1adcf040-9df5-46b9-ab56-8e33795b5f84) |
+| SpaceX launch | [`spacex-launch/`](./spacex-launch) | [Watch](https://hyperframes.dev/viewer/58d80c88-37fe-4527-a803-1b29c35373b7) |
+| Texture launch video | [`texture-launch-video/`](./texture-launch-video) | [Watch](https://hyperframes.dev/viewer/b92c24b4-5143-4bce-85ce-408be4c3c4ec) |
+| Timeline editor launch | [`timeline-launch/`](./timeline-launch) | [Watch](https://hyperframes.dev/viewer/105200be-ebda-4209-a225-a2edf01cf1b7) |
+| Variables launch | [`variables-launch/`](./variables-launch) | [Watch](https://hyperframes.dev/viewer/6387d7c2-3819-4e60-916c-e346a3598b67) |
+| VFX HeyGen combined | [`vfx-heygen-combined/`](./vfx-heygen-combined) | [Watch](https://hyperframes.dev/viewer/3c3669b8-65d0-4f1f-8cdb-e608c1a58ff9) |
+| Website → HyperFrames demo | [`website-to-hyperframes/`](./website-to-hyperframes) | [Watch](https://hyperframes.dev/viewer/85d2d8d5-bf5b-4d04-901d-7c3ae157a30a) |
 
 ## Cloning
 
