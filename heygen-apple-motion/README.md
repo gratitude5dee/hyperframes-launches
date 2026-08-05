@@ -11,7 +11,8 @@ That's the whole instruction. Everything the agent needs — what to change, wha
 alone, how to fetch the brand's real assets, and how to check its own work — is written into
 each project's `README.md`, for the agent rather than for you.
 
-![hero](hero/renders/hero_2026-08-05_10-54-33.mp4)
+Rendered videos are not committed to this repo. Run `npm run render` in any project to produce
+`renders/*.mp4` locally; `hero/` builds the 54.2s compilation of all four.
 
 ## The templates
 

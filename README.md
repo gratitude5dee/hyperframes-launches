@@ -7,7 +7,7 @@ Source for HeyGen's HyperFrames launch videos. Each subdirectory is a standalone
 | Launch | Directory | Public video |
 | --- | --- | --- |
 | HF HeyGen × Stripe | [`HF-heygen-stripe/`](./HF-heygen-stripe) | [Watch](https://hyperframes.dev/viewer/d6f7d40f-1e32-4b73-a551-af47cc19e8a2) |
-| Re-brandable launch templates (×4) | [`heygen-apple-motion/`](./heygen-apple-motion) | [Watch](./heygen-apple-motion/hero/renders/hero_2026-08-05_10-54-33.mp4) |
+| Re-brandable launch templates (×4) | [`heygen-apple-motion/`](./heygen-apple-motion) | — |
 | Claude paper launch | [`claude-paper-launch/`](./claude-paper-launch) | [Watch](https://hyperframes.dev/viewer/659498ab-d77e-48a8-a719-dd97adbbd3e5) |
 | Cloud Render launch | [`cloud-render-launch/`](./cloud-render-launch) | [Watch](https://hyperframes.dev/viewer/4259dc01-157a-4966-9c58-4e97faa2548e) |
 | Figma integration launch | [`figma-launch/`](./figma-launch) | [Watch](https://hyperframes.dev/viewer/58fdce81-6ef0-4860-899d-d6b3da692a54) |

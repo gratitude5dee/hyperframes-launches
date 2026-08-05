@@ -7,7 +7,7 @@ chat thread, and a closing text selection.
 No video, no image sequences, no After Effects. Every pixel is DOM + SVG driven by a
 single paused GSAP timeline, so it renders deterministically at any resolution.
 
-![12.13s · 1080×1080 · 30fps](renders/heygen-bouncy-ui.mp4)
+Run `npm run render` to produce `renders/*.mp4` (12.13s · 1080×1080 · 30fps).
 
 ```
 1080 × 1080 · 12.133 s · 30 fps · silent
