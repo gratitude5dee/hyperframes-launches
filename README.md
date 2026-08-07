@@ -16,6 +16,7 @@ Source for HeyGen's HyperFrames launch videos. Each subdirectory is a standalone
 | Inspector launch | [`inspector-launch/`](./inspector-launch) | [Watch](https://hyperframes.dev/viewer/87889a4c-cc67-4e4a-b576-b57dd892fee3) |
 | Kimi K3 promo | [`k3-promo/`](./k3-promo) | [Watch](./k3-promo/k3-promo.mp4) |
 | PR-to-video launch | [`pr-to-video-launch/`](./pr-to-video-launch) | [Watch](https://hyperframes.dev/viewer/72c9b502-0c96-4bde-9a78-9a178267c475) |
+| Send to HyperFrames launch | [`send-to-hyperframes-launch/`](./send-to-hyperframes-launch) | — |
 | SFX music launch | [`sfx-music-launch/`](./sfx-music-launch) | [Watch](https://hyperframes.dev/viewer/1adcf040-9df5-46b9-ab56-8e33795b5f84) |
 | SpaceX launch | [`spacex-launch/`](./spacex-launch) | [Watch](https://hyperframes.dev/viewer/58d80c88-37fe-4527-a803-1b29c35373b7) |
 | Texture launch video | [`texture-launch-video/`](./texture-launch-video) | [Watch](https://hyperframes.dev/viewer/b92c24b4-5143-4bce-85ce-408be4c3c4ec) |
