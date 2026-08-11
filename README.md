@@ -15,6 +15,7 @@ Source for HeyGen's HyperFrames launch videos. Each subdirectory is a standalone
 | HyperFrames launch | [`hyperframes-launch/`](./hyperframes-launch) | [Watch](https://hyperframes.dev/viewer/9ab8d480-7507-4905-9222-ae6ea4b2fb5a) |
 | Inspector launch | [`inspector-launch/`](./inspector-launch) | [Watch](https://hyperframes.dev/viewer/87889a4c-cc67-4e4a-b576-b57dd892fee3) |
 | Kimi K3 promo | [`k3-promo/`](./k3-promo) | [Watch](./k3-promo/k3-promo.mp4) |
+| Liquid brand refraction | [`liquid-brand-refraction/`](./liquid-brand-refraction) | — |
 | PR-to-video launch | [`pr-to-video-launch/`](./pr-to-video-launch) | [Watch](https://hyperframes.dev/viewer/72c9b502-0c96-4bde-9a78-9a178267c475) |
 | Send to HyperFrames launch | [`claude-design-send-hyperframes-launch/`](./claude-design-send-hyperframes-launch) | — |
 | SFX music launch | [`sfx-music-launch/`](./sfx-music-launch) | [Watch](https://hyperframes.dev/viewer/1adcf040-9df5-46b9-ab56-8e33795b5f84) |
@@ -62,10 +63,12 @@ Each video directory follows the HyperFrames project shape:
 ├── index.html          # top-level composition
 ├── compositions/       # scene-level compositions
 ├── assets/             # video, audio, image inputs (LFS)
-├── renders/            # final rendered videos (LFS)
+├── renders/            # local rendered videos (ignored by Git)
 ├── STORYBOARD.md       # shot-by-shot plan
 └── meta.json           # project metadata
 ```
+
+Generated files under each top-level project's `renders/` directory stay local. Commit the composition source and required input media under `assets/`; files under `assets/renders/` remain tracked when they are source material.
 
 ## Working on a video
 

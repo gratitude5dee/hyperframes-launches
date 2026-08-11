@@ -3,6 +3,11 @@ __MACOSX/
 Thumbs.db
 
 .thumbnails/
+**/.transcode-cache/
+
+# Generated project outputs stay local. Source media under assets/renders/ is retained.
+/*/renders/*
+!/*/renders/.gitkeep
 
 node_modules/
 .pnpm-store/
