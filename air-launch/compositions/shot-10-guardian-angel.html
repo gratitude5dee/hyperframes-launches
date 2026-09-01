@@ -1,5 +1,5 @@
 <template id="shot-10-guardian-angel-template">
-  <div id="s10-root" data-composition-id="shot-10-guardian-angel" data-width="1920" data-height="1080" data-duration="10">
+  <div id="s10-root" data-composition-id="shot-10-guardian-angel" data-width="1920" data-height="1080" data-duration="12">
     <style>
       @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
         src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
@@ -41,7 +41,7 @@
       #s10-root .copy .w{display:inline-block;margin-right:.26em;will-change:transform}
     </style>
 
-    <div class="frame clip" id="s10-frame" data-layout-allow-overflow data-start="0" data-duration="10" data-track-index="1">
+    <div class="frame clip" id="s10-frame" data-layout-allow-overflow data-start="0" data-duration="12" data-track-index="1">
       <div class="head">
         <div class="num" id="s10-num">On the backend</div>
         <div class="title" id="s10-title">Every agent is a guardian angel.</div>
@@ -148,8 +148,10 @@
         tl.to(w,{y:0,opacity:1,duration:.4},5.30 + i*.045);
       });
 
-      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},9.66);
-      tl.to(frame,{opacity:0,duration:.20,ease:'none'},9.78);
+      // the finished diagram holds through the phrase, drifting left toward the cut
+      tl.to(frame,{x:-30,duration:2.0,ease:'sine.inOut'},9.60);
+      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},11.66);
+      tl.to(frame,{opacity:0,duration:.20,ease:'none'},11.78);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["shot-10-guardian-angel"] = tl;

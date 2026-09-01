@@ -1,5 +1,5 @@
 <template id="shot-08-knowledge-work-template">
-  <div id="s08-root" data-composition-id="shot-08-knowledge-work" data-width="1920" data-height="1080" data-duration="9">
+  <div id="s08-root" data-composition-id="shot-08-knowledge-work" data-width="1920" data-height="1080" data-duration="7.5">
     <style>
       @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
         src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
@@ -31,14 +31,20 @@
         border-bottom:1px solid rgba(255,255,255,.12)}
       #s08-root .bar img{width:34px;height:34px;display:block}
       #s08-root .bar span{font-size:23px;font-weight:550;letter-spacing:.02em;color:rgba(226,236,255,.82)}
-      #s08-root .prompt{margin:26px 0 6px;margin-left:auto;width:600px;border-radius:26px 26px 8px 26px;
-        padding:22px 26px;font-size:24px;font-weight:500;line-height:1.35;color:#08101F;
-        background:linear-gradient(180deg,#DCEBFF,#B7D5FF);box-shadow:0 20px 40px -18px rgba(0,0,0,.6);
+      /* iMessage-blue user bubble, per the buoy.chat reference thread */
+      #s08-root .prompt{margin:24px 0 6px;margin-left:auto;width:600px;border-radius:26px 26px 8px 26px;
+        padding:20px 26px;font-size:24px;font-weight:500;line-height:1.35;color:#FFFFFF;
+        background:linear-gradient(180deg,#4E9BFF,#2E7BF6);box-shadow:0 20px 40px -18px rgba(0,0,0,.6);
         will-change:transform}
-      #s08-root .rows{margin-top:20px}
-      #s08-root .row{display:flex;align-items:center;gap:20px;height:86px;padding:0 22px;
+      #s08-root .memchip{margin:16px auto 0;display:flex;align-items:center;gap:10px;width:max-content;
+        padding:8px 18px;border-radius:999px;font-size:19px;font-weight:520;
+        color:rgba(212,226,255,.85);background:rgba(255,255,255,.07);
+        border:1px solid rgba(255,255,255,.14);will-change:transform}
+      #s08-root .memchip svg{width:22px;height:22px;display:block}
+      #s08-root .rows{margin-top:18px}
+      #s08-root .row{display:flex;align-items:center;gap:20px;height:78px;padding:0 22px;
         border-radius:22px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);
-        margin-bottom:12px;will-change:transform}
+        margin-bottom:10px;will-change:transform}
       #s08-root .row img{width:42px;height:42px;display:block;flex:0 0 auto}
       #s08-root .row b{font-size:26px;font-weight:520;letter-spacing:-.01em}
       #s08-root .row .tick{margin-left:auto;width:44px;height:44px;flex:0 0 auto}
@@ -49,7 +55,7 @@
         border:1px solid rgba(255,201,120,.6);background:rgba(255,201,120,.12)}
     </style>
 
-    <div class="frame clip" id="s08-frame" data-layout-allow-overflow data-start="0" data-duration="9" data-track-index="1">
+    <div class="frame clip" id="s08-frame" data-layout-allow-overflow data-start="0" data-duration="7.5" data-track-index="1">
       <div class="head">
         <div class="num" id="s08-num">5) Knock off Knowledge Work</div>
         <div class="title" id="s08-title">The work you<br>never chose.</div>
@@ -74,6 +80,10 @@
           <div class="row soon" data-row><img src="logos/glyph-computer.svg" alt=""><b>desktop app &amp; local computer use</b>
             <span class="soonpill">coming soon</span></div>
         </div>
+        <div class="memchip" id="s08-memchip">
+          <svg viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M6.5 16.5a4 4 0 0 1-.7-7.94A5.5 5.5 0 0 1 16.6 9.6 3.5 3.5 0 0 1 15.5 16.5h-9Z" stroke="rgba(212,226,255,.85)" stroke-width="1.6" stroke-linejoin="round"/></svg>
+          Memory updated — preferences noted for next time
+        </div>
       </div>
     </div>
 
@@ -88,12 +98,14 @@
       var prompt = root.querySelector('#s08-prompt');
       var rows = root.querySelectorAll('#s08-rows .row');
       var ticks = root.querySelectorAll('#s08-rows .tick path');
+      var memchip = root.querySelector('#s08-memchip');
       var EO = 'expo.out';
 
       gsap.set(head,{y:52,opacity:0});
       gsap.set(surface,{y:70,opacity:0,scale:.96,transformOrigin:'50% 50%'});
       gsap.set(prompt,{y:30,opacity:0,scale:.96,transformOrigin:'100% 100%'});
       gsap.set(rows,{y:56,opacity:0});
+      gsap.set(memchip,{y:22,opacity:0});
       ticks.forEach(function(p){
         var L = p.getTotalLength ? p.getTotalLength() : 40;
         gsap.set(p,{strokeDasharray:L,strokeDashoffset:L});
@@ -103,18 +115,21 @@
       tl.fromTo(frame,{x:230,opacity:.35},{x:0,opacity:1,duration:.34,ease:'power4.out',immediateRender:false},0);
       head.forEach(function(el,i){ tl.to(el,{y:0,opacity:1,duration:.66},.26 + i*.13); });
 
-      tl.to(surface,{y:0,opacity:1,scale:1,duration:.95},.50);
-      tl.to(prompt,{y:0,opacity:1,scale:1,duration:.7},.92);
+      tl.to(surface,{y:0,opacity:1,scale:1,duration:.85},.42);
+      tl.to(prompt,{y:0,opacity:1,scale:1,duration:.6},.80);
 
-      // each task row arrives, then ticks itself off — the work resolving in reading order
+      // rows land on the passage's snare hits (track 56s = local 0: 2.20, 2.75, 3.26,
+      // 3.95, 4.63, 5.42), each tick drawing on the after-beat
+      var beats = [2.20, 2.75, 3.26, 3.95, 4.63, 5.42];
       rows.forEach(function(r,i){
-        var at = 1.42 + i*.62;
-        tl.to(r,{y:0,opacity:1,duration:.62},at);
-        if (ticks[i]) tl.to(ticks[i],{strokeDashoffset:0,duration:.42,ease:'power2.out'},at+.34);
+        var at = beats[i];
+        tl.to(r,{y:0,opacity:1,duration:.5},at - .18);
+        if (ticks[i]) tl.to(ticks[i],{strokeDashoffset:0,duration:.36,ease:'power2.out'},at + .10);
       });
+      tl.to(memchip,{y:0,opacity:1,duration:.55},6.20);
 
-      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},8.66);
-      tl.to(frame,{opacity:0,duration:.20,ease:'none'},8.78);
+      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},7.16);
+      tl.to(frame,{opacity:0,duration:.20,ease:'none'},7.28);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["shot-08-knowledge-work"] = tl;

@@ -1,5 +1,5 @@
 <template id="shot-03-endowments-template">
-  <div id="s03-root" data-composition-id="shot-03-endowments" data-width="1920" data-height="1080" data-duration="8.5">
+  <div id="s03-root" data-composition-id="shot-03-endowments" data-width="1920" data-height="1080" data-duration="11.5">
     <style>
       @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
         src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
@@ -26,7 +26,7 @@
       #s03-root .chip img{width:50px;height:50px;display:block}
     </style>
 
-    <div class="frame clip" id="s03-frame" data-layout-allow-overflow data-start="0" data-duration="8.5" data-track-index="1">
+    <div class="frame clip" id="s03-frame" data-layout-allow-overflow data-start="0" data-duration="11.5" data-track-index="1">
       <div class="copy">
         <div class="line" id="s03-l1">
           <span class="w">Your</span><span class="w">agent</span><span class="w">gets</span><span class="w">a</span>
@@ -82,8 +82,10 @@
         }
       }
 
-      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},8.16);
-      tl.to(frame,{opacity:0,duration:.20,ease:'none'},8.28);
+      // the finished sentence holds through the phrase, drifting left toward the cut
+      tl.to(frame,{x:-34,duration:5.2,ease:'sine.inOut'},5.60);
+      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},11.16);
+      tl.to(frame,{opacity:0,duration:.20,ease:'none'},11.28);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["shot-03-endowments"] = tl;

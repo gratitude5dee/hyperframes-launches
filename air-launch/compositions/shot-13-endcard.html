@@ -1,5 +1,5 @@
 <template id="shot-13-endcard-template">
-  <div id="s13-root" data-composition-id="shot-13-endcard" data-width="1920" data-height="1080" data-duration="9">
+  <div id="s13-root" data-composition-id="shot-13-endcard" data-width="1920" data-height="1080" data-duration="7">
     <style>
       @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
         src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
@@ -20,6 +20,11 @@
       #s13-root .built{margin-top:34px;font-size:38px;font-weight:500;letter-spacing:-.01em;
         color:rgba(236,243,255,.94);display:flex;justify-content:center;align-items:center;gap:16px}
       #s13-root .built img{width:40px;height:40px;display:block}
+      /* supplied WZRD.tech chrome blackletter mark */
+      #s13-root .built img.wzrd{width:auto;height:56px;
+        filter:drop-shadow(0 8px 22px rgba(3,10,26,.55))}
+      /* supplied Onairos gradient-silhouette mark */
+      #s13-root .plate img.onairos{border-radius:50%;object-fit:cover;object-position:50% 18%}
       #s13-root .partners{margin-top:30px;font-size:24px;font-weight:550;letter-spacing:.32em;
         text-transform:uppercase;color:rgba(198,214,246,.72)}
 
@@ -34,17 +39,17 @@
       #s13-root .plate b{font-size:31px;font-weight:600;letter-spacing:-.02em}
     </style>
 
-    <div class="frame clip" id="s13-frame" data-layout-allow-overflow data-start="0" data-duration="9" data-track-index="1">
+    <div class="frame clip" id="s13-frame" data-layout-allow-overflow data-start="0" data-duration="7" data-track-index="1">
       <div class="scrim" id="s13-scrim"></div>
 
       <div class="lockup">
         <div class="mark" id="s13-mark"><img src="logos/air.svg" alt=""><b>air</b></div>
-        <div class="built" id="s13-built"><img src="logos/zaps.svg" alt="">Built on Zaps by WZRD.tech</div>
+        <div class="built" id="s13-built"><img src="logos/zaps.svg" alt="">Built on Zaps by <img class="wzrd" src="logos/wzrdtech-chrome.png" alt="WZRD.tech"></div>
         <div class="partners" id="s13-partners">in partnership with</div>
       </div>
 
       <div class="wall" id="s13-wall">
-        <div class="plate" data-plate><img src="logos/onairos.svg" alt=""><b>Onairos</b></div>
+        <div class="plate" data-plate><img class="onairos" src="logos/onairos-avatar.png" alt=""><b>Onairos</b></div>
         <div class="plate" data-plate><img src="logos/tenkicloud.svg" alt=""><b>TenkiCloud</b></div>
         <div class="plate" data-plate><img src="logos/box.svg" alt=""><b>Box</b></div>
         <div class="plate" data-plate><img src="logos/gmicloud.svg" alt=""><b>GMICloud</b></div>
@@ -91,8 +96,8 @@
         at += gap; gap *= .95;
       }
 
-      // final 5s: the frame holds dead still and lets the sky carry the last beat
-      tl.to({},{duration:.4},8.60);
+      // final seconds: the frame holds dead still and lets the sky carry the last beat
+      tl.to({},{duration:.4},6.60);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["shot-13-endcard"] = tl;

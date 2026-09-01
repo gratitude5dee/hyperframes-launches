@@ -1,5 +1,5 @@
 <template id="shot-01-open-template">
-  <div id="s01-root" data-composition-id="shot-01-open" data-width="1920" data-height="1080" data-duration="9">
+  <div id="s01-root" data-composition-id="shot-01-open" data-width="1920" data-height="1080" data-duration="6">
     <style>
       @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
         src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
@@ -14,8 +14,12 @@
       #s01-root .word{display:inline-block;font-size:214px;font-weight:600;letter-spacing:-.05em;
         line-height:.9;text-shadow:0 26px 70px rgba(3,10,26,.45)}
       #s01-root .word span{display:inline-block;will-change:transform}
-      #s01-root .by{margin-top:22px;font-size:29px;font-weight:500;letter-spacing:.42em;
-        text-transform:uppercase;color:rgba(238,245,255,.82)}
+      #s01-root .by{margin-top:20px;display:flex;justify-content:center;align-items:center;gap:16px;
+        font-size:26px;font-weight:500;letter-spacing:.42em;text-transform:uppercase;
+        color:rgba(238,245,255,.82)}
+      /* supplied WZRD.tech chrome blackletter mark (white bg knocked out) */
+      #s01-root .by img{height:58px;width:auto;display:block;
+        filter:drop-shadow(0 8px 22px rgba(3,10,26,.55))}
       #s01-root .hero{position:absolute;left:50%;top:520px;width:1180px;margin-left:-590px;
         text-align:center;font-size:38px;font-weight:450;line-height:1.42;color:rgba(240,246,255,.94);
         text-shadow:0 10px 34px rgba(3,10,26,.5)}
@@ -34,10 +38,10 @@
         color:rgba(236,243,255,.9);text-shadow:0 6px 20px rgba(3,10,26,.55)}
     </style>
 
-    <div class="frame clip" id="s01-frame" data-layout-allow-overflow data-start="0" data-duration="9" data-track-index="1">
+    <div class="frame clip" id="s01-frame" data-layout-allow-overflow data-start="0" data-duration="6" data-track-index="1">
       <div class="mark">
         <div class="word" id="s01-word"><span>a</span><span>i</span><span>r</span></div>
-        <div class="by" id="s01-by">by WZRD.tech</div>
+        <div class="by" id="s01-by">by <img src="logos/wzrdtech-chrome.png" alt="WZRD.tech"></div>
       </div>
 
       <div class="hero" id="s01-hero">
@@ -84,15 +88,15 @@
 
       // app tiles: staggered 3D arrival, soft shadow already baked in CSS
       tiles.forEach(function(t,i){
-        var at = 2.10 + i*.235;
+        var at = 1.90 + i*.20;
         tl.to(t,{y:0,opacity:1,scale:1,rotateX:0,duration:.72},at);
         tl.to(caps[i],{y:0,opacity:1,duration:.5},at+.16);
       });
 
-      // 0.4s stillness, then the whole composed frame drifts LEFT and the cut lands mid-motion
-      tl.to(frame,{x:-38,duration:3.6,ease:'sine.inOut'},4.60);
-      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},8.66);
-      tl.to(frame,{opacity:0,duration:.20,ease:'none'},8.78);
+      // stillness, then the whole composed frame drifts LEFT and the cut lands mid-motion
+      tl.to(frame,{x:-38,duration:1.9,ease:'sine.inOut'},3.60);
+      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},5.66);
+      tl.to(frame,{opacity:0,duration:.20,ease:'none'},5.78);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["shot-01-open"] = tl;

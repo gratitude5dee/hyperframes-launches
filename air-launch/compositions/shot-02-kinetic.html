@@ -1,5 +1,5 @@
 <template id="shot-02-kinetic-template">
-  <div id="s02-root" data-composition-id="shot-02-kinetic" data-width="1920" data-height="1080" data-duration="8">
+  <div id="s02-root" data-composition-id="shot-02-kinetic" data-width="1920" data-height="1080" data-duration="7.8">
     <style>
       @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
         src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
@@ -22,7 +22,7 @@
         background:linear-gradient(90deg,rgba(255,255,255,.9),rgba(255,255,255,0))}
     </style>
 
-    <div class="frame clip" id="s02-frame" data-layout-allow-overflow data-start="0" data-duration="8" data-track-index="1">
+    <div class="frame clip" id="s02-frame" data-layout-allow-overflow data-start="0" data-duration="7.8" data-track-index="1">
       <div class="beat" id="s02-beat-a">
         <div class="rule" id="s02-rule"></div>
         <div class="line" id="s02-line-a"><span class="w">the</span><span class="w">future</span><span class="w">of</span><span class="w">interfaces</span></div>
@@ -73,9 +73,9 @@
       // the payoff word settles last and holds still for 0.5s before the cut
       tl.fromTo(beatB[beatB.length-1],{scale:.92},{scale:1,duration:.9,ease:'expo.out',immediateRender:false},3.86);
 
-      tl.to(frame,{x:-34,duration:3.1,ease:'sine.inOut'},4.50);
-      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},7.66);
-      tl.to(frame,{opacity:0,duration:.20,ease:'none'},7.78);
+      tl.to(frame,{x:-34,duration:2.8,ease:'sine.inOut'},4.50);
+      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},7.46);
+      tl.to(frame,{opacity:0,duration:.20,ease:'none'},7.58);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["shot-02-kinetic"] = tl;

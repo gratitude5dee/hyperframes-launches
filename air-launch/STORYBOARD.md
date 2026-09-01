@@ -1,6 +1,6 @@
 # air by WZRD.tech — launch film
 
-**1920×1080 · 30fps · 108s · 13 shots + one continuous sky.**
+**1920×1080 · 30fps · 103s · 13 shots + one continuous sky + music.**
 Master: `index.html` (`data-composition-id="master"`). One sub-composition per shot in
 `compositions/`, layered by `data-track-index`, seeked by frame — nothing plays in real time.
 
@@ -22,11 +22,25 @@ Everything in the film obeys three rules, taken from `heygen-apple-motion/01-ui-
 
 Structural consequences: the master stage has an opaque `#050810` ground (every seam is a
 mid-motion cut, which briefly sums opacity below 1), and each shot's own root is opaque except
-the four that ride the sky (01, 02, 11, 12, 13).
+the four that ride the sky (01, 02, 11, 12, 13). A film-grade layer (soft vignette + a
+fixed-seed SVG-turbulence grain at 5% overlay) sits above every shot in the master.
+
+## Music (`assets/bgm.mp3` — Passwords.mp3, supplied)
+
+83.4 BPM, 4/4, 103.0s. Analyzed with the canonical beatgrid analyzer into `audiomap.json`,
+which is the film's timing spine — every seam sits on one of its anchors:
+
+- **SURGE ~6s** → shot 01 → 02 cut. **Phrase edge 13.77s** → 02 → 03. **Phrase edge 25.33s** → 03 → 04.
+- **SURGE ~51s** → shot 07's third computer card slams home (48.5 + 2.5).
+- Shot 08's six task rows land on the passage's snare hits (56 + 2.20/2.75/3.26/3.95/4.63/5.42).
+- **Hard stops 67s / 69s** → shot 09's second remote press freezes the whole mesh at 67s and the
+  frame holds dead still until the 69s cut into the backend act.
+- **Near-silence 89–103s** → "air, your guardian angel" and the end card ride the quiet tail;
+  the volume lane fades in over 0.35s and out from 100.5s with the sky.
 
 ## The sky (`compositions/sky.html`)
 
-One instance, `data-start="0" data-duration="108"`, `data-track-index="0"` — it is the opening
+One instance, `data-start="0" data-duration="103"`, `data-track-index="0"` — it is the opening
 background, it sits unseen behind the opaque chapter shots, and it returns for the close.
 
 - WebGL: fBm cloud layers (4 octaves of value noise), a sun disc with bloom, god rays, and a
@@ -35,8 +49,8 @@ background, it sits unseen behind the opaque chapter shots, and it returns for t
   a `requestAnimationFrame` loop. A proxy `{t, p}` is tweened on the paused timeline and its
   `onUpdate` re-renders the frame, so frame *n* always produces the same pixels.
 - `uProgress` 0 → 1 moves the sky from bright cloud-lit morning to a darker veiled dusk:
-  `0 → .18` over the open (0–17s), `→ .42` across the chapters (17–86.5s), `→ .86` under the
-  close (86.5–108s) on `power1.inOut`.
+  `0 → .18` over the open (0–13.8s), `→ .42` across the chapters (13.8–81s), `→ .86` under the
+  close (81–103s) on `power1.inOut`.
 - Fallback: if WebGL or shader compilation is unavailable (headless validation), it paints a
   Canvas-2D deep-navy → sky-blue gradient with a sun glow and the same `uProgress` veil.
 
@@ -44,21 +58,21 @@ background, it sits unseen behind the opaque chapter shots, and it returns for t
 
 | # | Composition | Start | Dur | Beat | Entrance / exit | Cut technique |
 |---|---|---|---|---|---|---|
-| 01 | `shot-01-open.html` | 0 | 9.0 | "air by WZRD.tech" over the cloud sky; the hero line from the airv2 landing page; six app tiles (iMessage, Gmail, Calendar, Chrome, Spotify, Shopify) name what the agent does | Inverse-zoom open (`scale 1.08 → 1`, `expo.out`) + waterfall wordmark (`yPercent 112 → 0`); tiles on `rotateX -26 → 0`, shrinking stagger | Opens on the sky, exits left |
-| 02 | `shot-02-kinetic.html` | 9.0 | 8.0 | "the future of interfaces is invisible, / as light as air" | Word-level waterfall in from `x: 230`; beat A exits word-by-word on `power4.in` as beat B enters | Hard cut on the sky, matched leftward vector |
-| 03 | `shot-03-endowments.html` | 17.0 | 8.5 | "Your agent gets a phone, an email, a wallet, an encrypted key vault, and a custom composable computer." — each noun becomes an icon chip | Words rise 0.16s apart; each chip lands on `rotateX` and its glyph pops 0.10s later | Hard cut, `x: 230 → 0` |
-| 04 | `shot-04-hyperpersonalization.html` | 25.5 | 8.5 | "1) Hyperpersonalization" — Spotify, Netflix, YouTube orbit an Onairos persona hub | Rings scale in; nodes placed at fixed 120° angles, then a 96° `sine.inOut` spin with counter-rotation so the marks stay upright | Hard cut |
-| 05 | `shot-05-import-context.html` | 34.0 | 8.5 | "2) Import Context" — ChatGPT + Claude/your existing agent, then Notes, Calendar, iMessage, Chrome profile wiring into an air context panel | Source cards cascade in from the left; each SVG wire draws on `strokeDashoffset` after its card lands; imported bars fill `scaleX` from origin `0% 50%` | Hard cut |
-| 06 | `shot-06-connect-apps.html` | 42.5 | 8.5 | "3) Connect your Apps — across 1000+ apps" — Instagram, Meta, Shopify featured over a swarm of app icons | Swarm arrives on a fixed 8×6 lattice with deterministic `sin/cos` jitter (no RNG); counter proxy tweens 0 → "1,000+" on `power2.out` | Hard cut |
-| 07 | `shot-07-composable-computer.html` | 51.0 | 8.5 | "4) A composable computer" — Ubuntu in a VM, Omarchy on Linux, macOS on Apple Silicon, plus "Omarchy on native Apple Silicon — coming soon" | Three cards rise on `rotateX`, badges scale in behind them, then the dashed coming-soon banner slides in last | Hard cut |
-| 08 | `shot-08-knowledge-work.html` | 59.5 | 9.0 | "5) Knock off Knowledge Work" — a chat surface (buoy.chat as the visual reference) taking one instruction, then six task rows completing | Prompt bubble scales in; rows arrive 0.5s apart, each tick drawn by `strokeDashoffset`; the coming-soon row stays dashed and unticked | Hard cut |
-| 09 | `shot-09-remote-control.html` | 68.5 | 8.0 | "6) air is your remote control for hyperpersonal agents" — a remote presses, an 11-node agent mesh lights up | Remote rises from below; pad press is a 2-beat scale pulse; signal wires travel node to node on `power2.inOut` | Hard cut |
-| 10 | `shot-10-guardian-angel.html` | 76.5 | 10.0 | Guardian-angel backend: sandbox → mesh → task router (quantized model) → RL environment → ZDR policy, with the full backend sentence | Halo scales in, ten feathers draw outward from it, then each stage card lands and wires itself to the next; sentence resolves word by word at reading pace | Hard cut |
-| 11 | `shot-11-yours.html` | 86.5 | 6.5 | Back to the sky: "Your agent, your RL environment, your model, your weights." | Four clauses in from `x: 230` with shrinking gaps, then a held `sine.inOut` push | Hard cut; the sky underneath is continuous, so the cut reads as a lift |
-| 12 | `shot-12-guardian.html` | 93.0 | 6.0 | "air, your guardian angel" — the shot-10 wing, opened wider, over the veiled sky | Words in on the leftward vector; wing feathers draw; "air by WZRD.tech" kicker last | **The film's only dissolve** (0.42s) — legitimate because the sky carries it: the background never cuts |
-| 13 | `shot-13-endcard.html` | 99.0 | 9.0 | "Built on Zaps by WZRD.tech, in partnership with" + the 11-partner wall | Scrim fades up over the same sky; lockup arrives by inverse zoom; plates cascade with shrinking gaps, then the frame holds dead still for the last ~5s | Resolves; no exit travel — the film ends on a still frame |
+| 01 | `shot-01-open.html` | 0 | 6.0 | "air by WZRD.tech" over the cloud sky; the hero line from the airv2 landing page; six app tiles (iMessage, Gmail, Calendar, Chrome, Spotify, Shopify) name what the agent does | Inverse-zoom open (`scale 1.08 → 1`, `expo.out`) + waterfall wordmark (`yPercent 112 → 0`); tiles on `rotateX -26 → 0`, shrinking stagger | Opens on the sky, exits left |
+| 02 | `shot-02-kinetic.html` | 6.0 | 7.8 | "the future of interfaces is invisible, / as light as air" | Word-level waterfall in from `x: 230`; beat A exits word-by-word on `power4.in` as beat B enters | Hard cut on the sky, matched leftward vector |
+| 03 | `shot-03-endowments.html` | 13.8 | 11.5 | "Your agent gets a phone, an email, a wallet, an encrypted key vault, and a custom composable computer." — each noun becomes an icon chip | Words rise 0.16s apart; each chip lands on `rotateX` and its glyph pops 0.10s later | Hard cut, `x: 230 → 0` |
+| 04 | `shot-04-hyperpersonalization.html` | 25.3 | 7.7 | "1) Hyperpersonalization" — Spotify, Netflix, YouTube orbit the supplied Onairos persona mark on a tilted 3D ellipse | Depth read off `sin(angle)`: far tiles shrink, dim and blur behind the persona, near tiles pass in front; taste-graph motes stream inward on fixed phases; the hub breathes once per bar (~1.44s half-cycle at 83.4 BPM) | Hard cut |
+| 05 | `shot-05-import-context.html` | 33.0 | 7.5 | "2) Import Context" — ChatGPT + Claude/your existing agent, then Notes, Calendar, iMessage, Chrome profile wiring into an air context panel | Source cards cascade in from the left; each SVG wire draws on `strokeDashoffset` after its card lands; imported bars fill `scaleX` from origin `0% 50%` | Hard cut |
+| 06 | `shot-06-connect-apps.html` | 40.5 | 8.0 | "3) Connect your Apps — across 1000+ apps" — Instagram, Meta, Shopify featured over a swarm of app icons | Swarm on a deterministic phyllotaxis spiral (golden angle 137.508°, r ∝ √i — no RNG), blooming centre-out in index order; counter proxy tweens 0 → "1,000+" on `power2.out` | Hard cut |
+| 07 | `shot-07-composable-computer.html` | 48.5 | 7.5 | "4) A composable computer" — Ubuntu in a VM, Omarchy on Linux, macOS on Apple Silicon, plus "Omarchy on native Apple Silicon — coming soon" | Three cards rise on `rotateX` with a 1.04 → 1 two-frame overshoot; the third lands exactly on the 51s SURGE; then the dashed coming-soon banner slides in | Hard cut |
+| 08 | `shot-08-knowledge-work.html` | 56.0 | 7.5 | "5) Knock off Knowledge Work" — a Buoy-style thread: iMessage-blue user bubble, six task rows, a "Memory updated" chip | Prompt bubble scales in; rows land on the passage's snare onsets, each tick drawn by `strokeDashoffset`; the coming-soon row stays dashed and unticked; the memory chip resolves last | Hard cut |
+| 09 | `shot-09-remote-control.html` | 63.5 | 5.5 | "6) air is your remote control for hyperpersonal agents" — a remote presses, an 11-node agent mesh lights up | Remote rises from below; the second press lands on the track's 67s hard stop and the whole lit mesh FREEZES dead still until the 69s cut | Hard cut on the second hard stop |
+| 10 | `shot-10-guardian-angel.html` | 69.0 | 12.0 | Guardian-angel backend: sandbox → mesh → task router (quantized model) → RL environment → ZDR policy, with the full backend sentence | Halo scales in, ten feathers draw outward from it, then each stage card lands and wires itself to the next; sentence resolves word by word at reading pace | Hard cut |
+| 11 | `shot-11-yours.html` | 81.0 | 8.0 | Back to the sky: "Your agent, your RL environment, your model, your weights." | Four clauses in from `x: 230` with shrinking gaps, then a held `sine.inOut` push | Hard cut; the sky underneath is continuous, so the cut reads as a lift |
+| 12 | `shot-12-guardian.html` | 89.0 | 7.0 | "air, your guardian angel" — the shot-10 wing, opened wider, over the veiled sky | Words in on the leftward vector; wing feathers draw; "air by WZRD.tech" kicker last | **The film's only dissolve** (0.42s) — legitimate because the sky carries it: the background never cuts |
+| 13 | `shot-13-endcard.html` | 96.0 | 7.0 | "Built on Zaps by WZRD.tech, in partnership with" + the 11-partner wall | Scrim fades up over the same sky; lockup arrives by inverse zoom; plates cascade with shrinking gaps, then the frame holds dead still for the last ~5s | Resolves; no exit travel — the film ends on a still frame |
 
-Total: 108.0s (inside the 90–120s brief).
+Total: 103.0s — the exact length of the track (inside the 90–120s brief).
 
 ## Assumptions
 
@@ -82,8 +96,13 @@ Total: 108.0s (inside the 90–120s brief).
   trademark of its owner and is used here nominatively): Spotify, Netflix, YouTube, OpenAI,
   Anthropic, Claude, Apple, iMessage, Google Calendar, Google Chrome, Instagram, Meta, Shopify,
   Ubuntu, 1Password, MongoDB, Vercel, Box, Linux, Gmail, and the app-swarm brands in shot 06.
+- **Supplied artwork** (provided by the client for this film): `onairos-avatar.png` — the
+  Onairos gradient-silhouette persona mark (shot 04 hub + end-card plate; background knocked
+  out from the supplied PNG); `wzrdtech-chrome.png` — the WZRD.tech chrome blackletter mark
+  (shots 01 and 13; white background knocked out from the supplied PNG). `assets/bgm.mp3` is
+  the supplied Passwords.mp3, unmodified.
 - **Simplified redraws** (not official artwork — geometric stand-ins drawn for this film,
-  because no official SVG was obtainable offline): `onairos.svg`, `tenkicloud.svg`,
+  because no official SVG was obtainable offline): `onairos.svg` (mesh nodes), `tenkicloud.svg`,
   `gmicloud.svg`, `hudrl.svg`, `cognition.svg`, `omarchy.svg`, `wzrd.svg`, `air.svg`,
   `zaps.svg`. **Replace these with official artwork before any public release.**
 - **Generic glyphs** drawn for this film (no brand attached): `glyph-phone`, `glyph-mail`,

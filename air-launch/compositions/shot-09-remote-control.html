@@ -1,5 +1,5 @@
 <template id="shot-09-remote-control-template">
-  <div id="s09-root" data-composition-id="shot-09-remote-control" data-width="1920" data-height="1080" data-duration="8">
+  <div id="s09-root" data-composition-id="shot-09-remote-control" data-width="1920" data-height="1080" data-duration="5.5">
     <style>
       @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
         src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
@@ -55,7 +55,7 @@
         font-weight:550;color:rgba(228,238,255,.9)}
     </style>
 
-    <div class="frame clip" id="s09-frame" data-layout-allow-overflow data-start="0" data-duration="8" data-track-index="1">
+    <div class="frame clip" id="s09-frame" data-layout-allow-overflow data-start="0" data-duration="5.5" data-track-index="1">
       <div class="head">
         <div class="num" id="s09-num">6) One remote</div>
         <div class="title" id="s09-title">air is your remote control for hyperpersonal agents.</div>
@@ -137,29 +137,30 @@
       tl.to(core,{scale:1,opacity:1,duration:.9},.86);
 
       // press: the pad depresses, the signal runs the wires, each agent wakes in turn
-      tl.to(pad,{scale:.88,duration:.10,ease:'power2.in'},1.62);
-      tl.to(pad,{scale:1,duration:.5,overwrite:'auto'},1.72);
-      tl.to(btns[0],{backgroundColor:'rgba(190,220,255,.5)',duration:.14,ease:'power2.in'},1.62);
-      tl.to(btns[0],{backgroundColor:'rgba(255,255,255,.09)',duration:.9},1.86);
+      tl.to(pad,{scale:.88,duration:.10,ease:'power2.in'},1.10);
+      tl.to(pad,{scale:1,duration:.5,overwrite:'auto'},1.20);
+      tl.to(btns[0],{backgroundColor:'rgba(190,220,255,.5)',duration:.14,ease:'power2.in'},1.10);
+      tl.to(btns[0],{backgroundColor:'rgba(255,255,255,.09)',duration:.9},1.34);
 
       nodes.forEach(function(n,i){
-        var at = 1.86 + i*.20;
-        tl.to(wires[i],{strokeDashoffset:0,duration:.5,ease:'power2.inOut'},at);
-        tl.to(n,{scale:1,opacity:1,duration:.6},at+.16);
-        tl.to(glows[i],{opacity:1,duration:.34},at+.34);
-        tl.to(glows[i],{opacity:.28,duration:.8},at+.74);
+        var at = 1.34 + i*.14;
+        tl.to(wires[i],{strokeDashoffset:0,duration:.44,ease:'power2.inOut'},at);
+        tl.to(n,{scale:1,opacity:1,duration:.5},at+.14);
+        tl.to(glows[i],{opacity:1,duration:.3},at+.3);
+        tl.to(glows[i],{opacity:.28,duration:.7},at+.64);
       });
 
-      // second press: the whole mesh answers at once
-      tl.to(pad,{scale:.9,duration:.10,ease:'power2.in'},5.10);
-      tl.to(pad,{scale:1,duration:.5,overwrite:'auto'},5.20);
-      tl.to(btns[1],{backgroundColor:'rgba(190,220,255,.5)',duration:.14,ease:'power2.in'},5.10);
-      tl.to(btns[1],{backgroundColor:'rgba(255,255,255,.09)',duration:.9},5.34);
-      tl.to(glows,{opacity:.9,duration:.5,stagger:.02},5.28);
-      tl.to(cap,{y:0,opacity:1,duration:.7},5.46);
+      // second press lands on the track's 67s hard stop (63.5 + 3.5): the whole mesh
+      // answers at once, then the frame FREEZES dead still until the 69s cut
+      tl.to(pad,{scale:.9,duration:.10,ease:'power2.in'},3.50);
+      tl.to(pad,{scale:1,duration:.5,overwrite:'auto'},3.60);
+      tl.to(btns[1],{backgroundColor:'rgba(190,220,255,.5)',duration:.14,ease:'power2.in'},3.50);
+      tl.to(btns[1],{backgroundColor:'rgba(255,255,255,.09)',duration:.9},3.74);
+      tl.to(glows,{opacity:.9,duration:.4,stagger:.02},3.66);
+      tl.to(cap,{y:0,opacity:1,duration:.6},3.84);
 
-      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},7.66);
-      tl.to(frame,{opacity:0,duration:.20,ease:'none'},7.78);
+      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},5.16);
+      tl.to(frame,{opacity:0,duration:.20,ease:'none'},5.28);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["shot-09-remote-control"] = tl;

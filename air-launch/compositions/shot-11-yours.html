@@ -1,5 +1,5 @@
 <template id="shot-11-yours-template">
-  <div id="s11-root" data-composition-id="shot-11-yours" data-width="1920" data-height="1080" data-duration="6.5">
+  <div id="s11-root" data-composition-id="shot-11-yours" data-width="1920" data-height="1080" data-duration="8">
     <style>
       @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
         src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
@@ -20,7 +20,7 @@
       #s11-root .row span.l{display:inline-block;will-change:transform}
     </style>
 
-    <div class="frame clip" id="s11-frame" data-layout-allow-overflow data-start="0" data-duration="6.5" data-track-index="1">
+    <div class="frame clip" id="s11-frame" data-layout-allow-overflow data-start="0" data-duration="8" data-track-index="1">
       <div class="stack" id="s11-stack">
         <div class="row" data-row><span class="l"><span class="own">Your</span> <i>agent</i>,</span></div>
         <div class="row" data-row><span class="l"><span class="own">your</span> <i>RL environment</i>,</span></div>
@@ -47,8 +47,8 @@
       }
       // held still for ~0.7s before the last cut of the film's spine
       tl.to(frame,{x:-26,duration:2.3,ease:'sine.inOut'},2.60);
-      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},6.16);
-      tl.to(frame,{opacity:0,duration:.20,ease:'none'},6.28);
+      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},7.66);
+      tl.to(frame,{opacity:0,duration:.20,ease:'none'},7.78);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["shot-11-yours"] = tl;

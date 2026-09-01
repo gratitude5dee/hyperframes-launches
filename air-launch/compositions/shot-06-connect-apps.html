@@ -1,5 +1,5 @@
 <template id="shot-06-connect-apps-template">
-  <div id="s06-root" data-composition-id="shot-06-connect-apps" data-width="1920" data-height="1080" data-duration="8.5">
+  <div id="s06-root" data-composition-id="shot-06-connect-apps" data-width="1920" data-height="1080" data-duration="8">
     <style>
       @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
         src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
@@ -46,7 +46,7 @@
         color:rgba(206,220,250,.76)}
     </style>
 
-    <div class="frame clip" id="s06-frame" data-layout-allow-overflow data-start="0" data-duration="8.5" data-track-index="1">
+    <div class="frame clip" id="s06-frame" data-layout-allow-overflow data-start="0" data-duration="8" data-track-index="1">
       <div class="swarmwrap">
         <div class="swarm" id="s06-swarm"></div>
         <div class="scrim"></div>
@@ -85,15 +85,15 @@
                    'etsy','walmart','target','nike','adidas','soundcloud','twitch','steam',
                    'epicgames','notion-2','spotify-2','gmail','calendar','chrome','netflix','youtube'];
 
-      // deterministic 8x6 lattice with a fixed sinusoidal jitter — no randomness anywhere
-      var COLS = 8, ROWS = 6, STEP_X = 132, STEP_Y = 132, dots = [];
+      // phyllotaxis swarm: golden-angle spiral (i * 137.508°, r ∝ √i) — the sunflower
+      // packing, fully deterministic, blooming naturally from the centre outward
+      var GA = 137.50776405 * Math.PI/180, CX = 540, CY = 420, dots = [];
       for (var i = 0; i < slugs.length; i++){
-        var c = i % COLS, r = Math.floor(i / COLS);
-        var jx = Math.sin(i * 1.7) * 14, jy = Math.cos(i * 2.3) * 14;
+        var rad = 58 + 44 * Math.sqrt(i), ang = i * GA;
         var d = document.createElement('div');
         d.className = 'dot';
-        d.style.left = (c * STEP_X + jx + 14) + 'px';
-        d.style.top  = (r * STEP_Y + jy + 22) + 'px';
+        d.style.left = (CX + rad*Math.cos(ang) - 48) + 'px';
+        d.style.top  = (CY + rad*Math.sin(ang)*0.78 - 48) + 'px';
         d.innerHTML = '<img src="logos/' + slugs[i] + '.svg" alt="">';
         swarm.appendChild(d);
         dots.push(d);
@@ -108,9 +108,9 @@
       tl.fromTo(frame,{x:230,opacity:.35},{x:0,opacity:1,duration:.34,ease:'power4.out',immediateRender:false},0);
       head.forEach(function(el,i){ tl.to(el,{y:0,opacity:1,duration:.66},.28 + i*.13); });
 
-      // the swarm blooms out of the centre of the lattice
+      // the swarm blooms outward along the spiral — index order IS centre-out order
       tl.to(dots,{scale:1,opacity:1,duration:.8,overwrite:'auto',
-        stagger:{each:.026,grid:[ROWS,COLS],from:'center'}},.62);
+        stagger:{each:.026,from:'start'}},.62);
 
       // the three named surfaces rise out of the swarm and stay lit
       tl.to(cards,{y:0,opacity:1,scale:1,rotateX:0,duration:.85,stagger:.16},2.30);
@@ -124,8 +124,8 @@
         countEl.firstChild.nodeValue = s;
       }},1.30);
 
-      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},8.16);
-      tl.to(frame,{opacity:0,duration:.20,ease:'none'},8.28);
+      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},7.66);
+      tl.to(frame,{opacity:0,duration:.20,ease:'none'},7.78);
 
       window.__timelines = window.__timelines || {};
       window.__timelines["shot-06-connect-apps"] = tl;

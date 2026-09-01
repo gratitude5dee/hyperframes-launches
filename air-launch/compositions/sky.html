@@ -1,5 +1,5 @@
 <template id="sky-template">
-  <div id="sky-root" data-composition-id="sky" data-width="1920" data-height="1080" data-duration="108">
+  <div id="sky-root" data-composition-id="sky" data-width="1920" data-height="1080" data-duration="103">
     <style>
       #sky-root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#050810}
       #sky-root *,#sky-root *::before,#sky-root *::after{box-sizing:border-box}
@@ -10,7 +10,7 @@
     </style>
 
     <canvas id="sky-canvas" width="1920" height="1080" class="clip"
-      data-start="0" data-duration="108" data-track-index="0"></canvas>
+      data-start="0" data-duration="103" data-track-index="0"></canvas>
     <div class="veil"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
@@ -22,8 +22,8 @@
       window.__timelines = window.__timelines || {};
 
       // uProgress: 0 = bright, cloud-lit morning sky (intro) -> 1 = darker, veiled dusk (outro).
-      // Keyed to the master cut list: intro 0-17s, mid film hidden behind opaque shots,
-      // outro sky returns at 86.5s and closes at 108s.
+      // Keyed to the master cut list: intro 0-13.8s, mid film hidden behind opaque shots,
+      // outro sky returns at 81s and closes at 103s with the music's silent tail.
       var proxy = {t:0, p:0};
 
       function fallback2d(){
@@ -43,7 +43,7 @@
           ctx.fillStyle = sun; ctx.fillRect(0,0,1920,1080);
         };
         draw(0);
-        tl.to(proxy,{p:1,duration:108,ease:'none',onUpdate:function(){draw(proxy.p);}},0);
+        tl.to(proxy,{p:1,duration:103,ease:'none',onUpdate:function(){draw(proxy.p);}},0);
         return true;
       }
 
@@ -165,13 +165,13 @@
       }
       renderFrame(0, 0);
 
-      tl.to(proxy,{t:108,duration:108,ease:'none',onUpdate:function(){renderFrame(proxy.t, proxy.p);}},0);
+      tl.to(proxy,{t:103,duration:103,ease:'none',onUpdate:function(){renderFrame(proxy.t, proxy.p);}},0);
       // bright -> settled through the intro, then the long veil into the outro,
       // as one tween so the three legs cannot overlap on the same property
       tl.to(proxy,{ease:'none',keyframes:[
-        {p:0.18,duration:17,ease:'none'},
-        {p:0.42,duration:69.5,ease:'none'},
-        {p:0.86,duration:21.5,ease:'power1.inOut'}
+        {p:0.18,duration:13.8,ease:'none'},
+        {p:0.42,duration:67.2,ease:'none'},
+        {p:0.86,duration:22,ease:'power1.inOut'}
       ]},0);
 
       window.__timelines["sky"] = tl;
