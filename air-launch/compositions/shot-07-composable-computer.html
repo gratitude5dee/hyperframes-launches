@@ -100,7 +100,7 @@
 
       var tl = gsap.timeline({paused:true,defaults:{ease:EO}});
       tl.fromTo(frame,{x:230,opacity:.35},{x:0,opacity:1,duration:.34,ease:'power4.out',immediateRender:false},0);
-      head.forEach(function(el,i){ tl.to(el,{y:0,opacity:1,duration:.7},.26 + i*.14); });
+      head.forEach(function(el,i){ tl.to(el,{y:0,opacity:1,duration:.7},.08 + i*.11); });
 
       // three cards land left to right — the third slams home exactly on the track's
       // 51s SURGE (shot starts at 48.5, so local 2.5) with a two-frame overshoot

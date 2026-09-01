@@ -148,7 +148,7 @@
       var tl = gsap.timeline({paused:true,defaults:{ease:EO}});
       tl.fromTo(frame,{x:230,opacity:.35},{x:0,opacity:1,duration:.34,ease:'power4.out',immediateRender:false},0);
 
-      head.forEach(function(el,i){ tl.to(el,{y:0,opacity:1,duration:.66},.30 + i*.13); });
+      head.forEach(function(el,i){ tl.to(el,{y:0,opacity:1,duration:.66},.08 + i*.11); });
 
       tl.to(rings,{scale:1,opacity:1,duration:1.1,stagger:.09,overwrite:'auto'},.62);
       tl.to(hub,{scale:1,opacity:1,duration:.9,overwrite:'auto'},.80);

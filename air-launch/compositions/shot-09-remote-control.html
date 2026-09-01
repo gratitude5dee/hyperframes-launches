@@ -131,7 +131,7 @@
 
       var tl = gsap.timeline({paused:true,defaults:{ease:EO}});
       tl.fromTo(frame,{x:230,opacity:.35},{x:0,opacity:1,duration:.34,ease:'power4.out',immediateRender:false},0);
-      head.forEach(function(el,i){ tl.to(el,{y:0,opacity:1,duration:.7},.26 + i*.14); });
+      head.forEach(function(el,i){ tl.to(el,{y:0,opacity:1,duration:.7},.08 + i*.11); });
 
       tl.to(remote,{x:0,opacity:1,duration:.95},.44);
       tl.to(core,{scale:1,opacity:1,duration:.9},.86);
