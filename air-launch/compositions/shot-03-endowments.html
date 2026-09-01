@@ -1,0 +1,96 @@
+<template id="shot-03-endowments-template">
+  <div id="s03-root" data-composition-id="shot-03-endowments" data-width="1920" data-height="1080" data-duration="8.5">
+    <style>
+      @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
+        src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
+
+      #s03-root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#050810;
+        font-family:'Inter var',system-ui,sans-serif;color:#EDF3FF;
+        -webkit-font-smoothing:antialiased}
+      #s03-root *,#s03-root *::before,#s03-root *::after{box-sizing:border-box}
+
+      #s03-root .frame{position:absolute;inset:0;background:
+        radial-gradient(78% 62% at 50% 24%,rgba(58,102,178,.30) 0%,rgba(5,8,16,0) 70%),
+        radial-gradient(52% 48% at 78% 96%,rgba(120,90,200,.22) 0%,rgba(5,8,16,0) 72%),
+        #050810}
+      #s03-root .copy{position:absolute;left:150px;right:150px;top:0;height:1080px;
+        display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+      #s03-root .line{font-size:74px;font-weight:500;letter-spacing:-.028em;line-height:1.5}
+      #s03-root .w{display:inline-block;margin-right:.26em;will-change:transform}
+      #s03-root .chip{display:inline-flex;align-items:center;gap:18px;margin-right:.24em;
+        padding:8px 26px 10px 20px;border-radius:24px;font-weight:650;
+        background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.05));
+        border:1px solid rgba(255,255,255,.20);
+        box-shadow:0 22px 50px -20px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.35);
+        will-change:transform}
+      #s03-root .chip img{width:50px;height:50px;display:block}
+    </style>
+
+    <div class="frame clip" id="s03-frame" data-layout-allow-overflow data-start="0" data-duration="8.5" data-track-index="1">
+      <div class="copy">
+        <div class="line" id="s03-l1">
+          <span class="w">Your</span><span class="w">agent</span><span class="w">gets</span><span class="w">a</span>
+          <span class="chip" data-chip><img src="logos/glyph-phone.svg" alt="">phone</span><span class="w">,</span>
+          <span class="w">an</span>
+          <span class="chip" data-chip><img src="logos/glyph-mail.svg" alt="">email</span><span class="w">,</span>
+        </div>
+        <div class="line" id="s03-l2">
+          <span class="w">a</span>
+          <span class="chip" data-chip><img src="logos/glyph-wallet.svg" alt="">wallet</span><span class="w">,</span>
+          <span class="w">an</span><span class="w">encrypted</span>
+          <span class="chip" data-chip><img src="logos/glyph-vault.svg" alt="">key vault</span><span class="w">,</span>
+        </div>
+        <div class="line" id="s03-l3">
+          <span class="w">and</span><span class="w">a</span><span class="w">custom</span><span class="w">composable</span>
+          <span class="chip" data-chip><img src="logos/glyph-computer.svg" alt="">computer</span><span class="w">.</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+    (function(){
+      var root = document.querySelector('[data-composition-id="shot-03-endowments"]');
+      var frame = root.querySelector('#s03-frame');
+      var seq = root.querySelectorAll('.w, .chip');
+      var words = root.querySelectorAll('.w');
+      var chips = root.querySelectorAll('.chip');
+      var icons = root.querySelectorAll('.chip img');
+      var EO = 'expo.out';
+
+      gsap.set(words,{y:44,opacity:0});
+      gsap.set(chips,{y:70,opacity:0,scale:.86,rotateX:-24,transformOrigin:'50% 100%'});
+      gsap.set(icons,{scale:.4,opacity:0});
+
+      var tl = gsap.timeline({paused:true,defaults:{ease:EO}});
+
+      // seam entry: picks up shot 02's leftward vector mid-flight
+      tl.fromTo(frame,{x:230,opacity:.35},{x:0,opacity:1,duration:.34,ease:'power4.out',immediateRender:false},0);
+
+      // the sentence writes itself in reading order: plain words rise from below,
+      // every endowment lands as a chip that holds the beat a fraction longer
+      var at = .46, ci = 0;
+      for (var i = 0; i < seq.length; i++){
+        var el = seq[i];
+        if (el.hasAttribute('data-chip')){
+          tl.to(el,{y:0,opacity:1,scale:1,rotateX:0,duration:.68,overwrite:'auto'},at);
+          tl.to(icons[ci],{scale:1,opacity:1,duration:.52,overwrite:'auto'},at+.10);
+          ci++; at += .50;
+        } else {
+          tl.to(el,{y:0,opacity:1,duration:.44,overwrite:'auto'},at);
+          at += .16;
+        }
+      }
+
+      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},8.16);
+      tl.to(frame,{opacity:0,duration:.20,ease:'none'},8.28);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["shot-03-endowments"] = tl;
+      var q = new URLSearchParams(location.search);
+      if(q.has('t')){ tl.seek(parseFloat(q.get('t'))||0); }
+      else if(q.get('dev')==='1'){ tl.play(); }
+    })();
+    </script>
+  </div>
+</template>

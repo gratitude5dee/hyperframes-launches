@@ -1,0 +1,106 @@
+<template id="shot-12-guardian-template">
+  <div id="s12-root" data-composition-id="shot-12-guardian" data-width="1920" data-height="1080" data-duration="6">
+    <style>
+      @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
+        src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
+
+      #s12-root{position:relative;width:1920px;height:1080px;overflow:hidden;background:transparent;
+        font-family:'Inter var',system-ui,sans-serif;color:#F8FAFF;
+        -webkit-font-smoothing:antialiased}
+      #s12-root *,#s12-root *::before,#s12-root *::after{box-sizing:border-box}
+
+      #s12-root .frame{position:absolute;inset:0}
+      /* the wing sits ABOVE the line, not behind it — halo, then wings, then the words */
+      #s12-root .center{position:absolute;left:0;right:0;top:592px;text-align:center}
+      #s12-root .wings{position:absolute;left:210px;top:120px;width:1500px;height:400px;overflow:visible}
+      #s12-root .halo{position:absolute;left:50%;top:194px;width:132px;height:132px;margin-left:-66px;
+        border-radius:50%;border:5px solid rgba(255,234,188,.9);
+        box-shadow:0 0 70px rgba(255,226,166,.6);will-change:transform}
+      #s12-root .line{position:relative;font-size:132px;font-weight:600;letter-spacing:-.05em;
+        text-shadow:0 26px 70px rgba(3,10,26,.6)}
+      #s12-root .line .w{display:inline-block;margin-right:.26em;will-change:transform}
+      #s12-root .line .mark{background:linear-gradient(96deg,#FFFFFF 8%,#DDEBFF 55%,#A9CCFF 100%);
+        -webkit-background-clip:text;background-clip:text;color:transparent}
+      #s12-root .kicker{margin-top:48px;font-size:30px;font-weight:500;letter-spacing:.34em;
+        text-transform:uppercase;color:rgba(232,240,255,.78)}
+    </style>
+
+    <div class="frame clip" id="s12-frame" data-layout-allow-overflow data-start="0" data-duration="6" data-track-index="1">
+      <svg class="wings" id="s12-wings" viewBox="0 0 1500 400" fill="none" aria-hidden="true"></svg>
+      <div class="halo" id="s12-halo"></div>
+      <div class="center">
+        <div class="line" id="s12-line"><span class="w"><span class="mark">air</span>,</span><span class="w">your</span><span class="w">guardian</span><span class="w">angel</span></div>
+        <div class="kicker" id="s12-kicker">air by WZRD.tech</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+    (function(){
+      var root = document.querySelector('[data-composition-id="shot-12-guardian"]');
+      var frame = root.querySelector('#s12-frame');
+      var wingsSvg = root.querySelector('#s12-wings');
+      var halo = root.querySelector('#s12-halo');
+      var words = root.querySelectorAll('#s12-line .w');
+      var kicker = root.querySelector('#s12-kicker');
+      var SVGNS = 'http://www.w3.org/2000/svg';
+
+      // the same five-feather wing as shot 10, opened wider for the payoff
+      var feathers = [
+        'M0 10 C 20 -104 246 -126 470 -44',
+        'M0 28 C 22 -74 236 -80 476 34',
+        'M0 46 C 24 -44 222 -24 452 116',
+        'M0 64 C 26 -14 206 32 418 190',
+        'M0 82 C 28 16 190 90 376 252'
+      ];
+      var wingPaths = [];
+      [1,-1].forEach(function(sx){
+        var g = document.createElementNS(SVGNS,'g');
+        g.setAttribute('transform','translate(750,140) scale('+sx+',1)');
+        feathers.forEach(function(d){
+          var p = document.createElementNS(SVGNS,'path');
+          p.setAttribute('d',d);
+          p.setAttribute('stroke','rgba(236,242,255,.62)');
+          p.setAttribute('stroke-width','3');
+          p.setAttribute('stroke-linecap','round');
+          p.setAttribute('fill','none');
+          g.appendChild(p);
+          wingPaths.push(p);
+        });
+        wingsSvg.appendChild(g);
+      });
+
+      gsap.set(words,{x:230,opacity:0});
+      gsap.set(halo,{scale:.62,opacity:0,transformOrigin:'50% 50%'});
+      gsap.set(kicker,{y:26,opacity:0});
+      wingPaths.forEach(function(p){
+        var L = p.getTotalLength ? p.getTotalLength() : 500;
+        gsap.set(p,{strokeDasharray:L,strokeDashoffset:L});
+      });
+
+      var tl = gsap.timeline({paused:true,defaults:{ease:'expo.out'}});
+
+      // words carry shot 11's leftward vector in, then everything stills for the payoff
+      var at = .08, gap = .085;
+      for (var i = 0; i < words.length; i++){
+        tl.fromTo(words[i],{x:230,opacity:.35},{x:0,opacity:1,duration:.56,ease:'power4.out',immediateRender:false},at);
+        at += gap; gap *= .9;
+      }
+      tl.to(halo,{scale:1,opacity:1,duration:1.0},.46);
+      wingPaths.forEach(function(p,i){
+        tl.to(p,{strokeDashoffset:0,duration:1.1,ease:'power2.out'},.62 + (i % 5)*.10);
+      });
+      tl.to(kicker,{y:0,opacity:1,duration:.8},1.90);
+
+      // no exit travel: the film hands off to the end card on a soft dissolve into the same sky
+      tl.to(frame,{opacity:0,duration:.42,ease:'power2.in'},5.52);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["shot-12-guardian"] = tl;
+      var q = new URLSearchParams(location.search);
+      if(q.has('t')){ tl.seek(parseFloat(q.get('t'))||0); }
+      else if(q.get('dev')==='1'){ tl.play(); }
+    })();
+    </script>
+  </div>
+</template>

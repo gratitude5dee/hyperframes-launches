@@ -1,0 +1,88 @@
+<template id="shot-02-kinetic-template">
+  <div id="s02-root" data-composition-id="shot-02-kinetic" data-width="1920" data-height="1080" data-duration="8">
+    <style>
+      @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
+        src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
+
+      #s02-root{position:relative;width:1920px;height:1080px;overflow:hidden;background:transparent;
+        font-family:'Inter var',system-ui,sans-serif;color:#F6F9FF;
+        -webkit-font-smoothing:antialiased}
+      #s02-root *,#s02-root *::before,#s02-root *::after{box-sizing:border-box}
+
+      #s02-root .frame{position:absolute;inset:0}
+      #s02-root .beat{position:absolute;left:170px;right:170px;top:0;height:1080px;
+        display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+      #s02-root .line{font-size:112px;font-weight:600;letter-spacing:-.035em;line-height:1.06;
+        text-shadow:0 22px 60px rgba(3,10,26,.5)}
+      #s02-root .line.sub{font-size:96px;font-weight:450;color:rgba(240,246,255,.9)}
+      #s02-root .w{display:inline-block;margin-right:.28em;will-change:transform}
+      #s02-root .accent{background:linear-gradient(96deg,#FFFFFF 8%,#BEDCFF 58%,#8FC0FF 100%);
+        -webkit-background-clip:text;background-clip:text;color:transparent}
+      #s02-root .rule{width:196px;height:3px;margin-bottom:44px;
+        background:linear-gradient(90deg,rgba(255,255,255,.9),rgba(255,255,255,0))}
+    </style>
+
+    <div class="frame clip" id="s02-frame" data-layout-allow-overflow data-start="0" data-duration="8" data-track-index="1">
+      <div class="beat" id="s02-beat-a">
+        <div class="rule" id="s02-rule"></div>
+        <div class="line" id="s02-line-a"><span class="w">the</span><span class="w">future</span><span class="w">of</span><span class="w">interfaces</span></div>
+        <div class="line sub" id="s02-line-b"><span class="w">is</span><span class="w">invisible,</span></div>
+      </div>
+      <div class="beat" id="s02-beat-b">
+        <div class="line" id="s02-line-c"><span class="w">as</span><span class="w">light</span><span class="w">as</span><span class="w accent">air</span></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+    (function(){
+      var root = document.querySelector('[data-composition-id="shot-02-kinetic"]');
+      var frame = root.querySelector('#s02-frame');
+      var rule = root.querySelector('#s02-rule');
+      var beatA = root.querySelectorAll('#s02-beat-a .w');
+      var beatB = root.querySelectorAll('#s02-beat-b .w');
+
+      // pre-set every word off-axis to the RIGHT: the film's current runs LEFT
+      gsap.set(beatA,{x:230,opacity:0});
+      gsap.set(beatB,{x:230,opacity:0});
+      gsap.set(rule,{scaleX:0,transformOrigin:'0% 50%',opacity:0});
+
+      var tl = gsap.timeline({paused:true});
+
+      // entry continues shot 01's leftward travel — cascade with shrinking gaps
+      var t = .06, gap = .075;
+      beatA.forEach(function(w){
+        tl.fromTo(w,{x:230,opacity:.35},{x:0,opacity:1,duration:.46,ease:'power4.out',immediateRender:false,overwrite:'auto'},t);
+        t += gap; gap *= .86;
+      });
+      tl.to(rule,{scaleX:1,opacity:1,duration:.7,ease:'expo.out'},.34);
+
+      // waterfall cut: beat A peels out LEFT while beat B ignites mid-path
+      var out = 3.52;
+      beatA.forEach(function(w,i){
+        tl.to(w,{x:-230,duration:.34,ease:'power4.in'},out+i*.022);
+        tl.to(w,{opacity:0,duration:.18,ease:'none'},out+i*.022);
+      });
+      tl.to(rule,{scaleX:0,opacity:0,duration:.28,ease:'power4.in'},out);
+
+      var t2 = 3.70, gap2 = .062;
+      beatB.forEach(function(w){
+        tl.fromTo(w,{x:230,opacity:.35},{x:0,opacity:1,duration:.42,ease:'power4.out',immediateRender:false,overwrite:'auto'},t2);
+        t2 += gap2; gap2 *= .84;
+      });
+      // the payoff word settles last and holds still for 0.5s before the cut
+      tl.fromTo(beatB[beatB.length-1],{scale:.92},{scale:1,duration:.9,ease:'expo.out',immediateRender:false},3.86);
+
+      tl.to(frame,{x:-34,duration:3.1,ease:'sine.inOut'},4.50);
+      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},7.66);
+      tl.to(frame,{opacity:0,duration:.20,ease:'none'},7.78);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["shot-02-kinetic"] = tl;
+      var q = new URLSearchParams(location.search);
+      if(q.has('t')){ tl.seek(parseFloat(q.get('t'))||0); }
+      else if(q.get('dev')==='1'){ tl.play(); }
+    })();
+    </script>
+  </div>
+</template>
