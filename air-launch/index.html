@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #050810; }
+      /* opaque stage ground: every seam is a mid-motion cut, which opens a summed-opacity < 1
+         window — without this the frame flashes white for a frame or two. */
+      #air-root { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #050810; }
+      #sky      { position: absolute; inset: 0; z-index: 0; }
+      #shot-01  { position: absolute; inset: 0; z-index: 1; }
+      #shot-02  { position: absolute; inset: 0; z-index: 2; }
+      #shot-03  { position: absolute; inset: 0; z-index: 3; }
+      #shot-04  { position: absolute; inset: 0; z-index: 4; }
+      #shot-05  { position: absolute; inset: 0; z-index: 5; }
+      #shot-06  { position: absolute; inset: 0; z-index: 6; }
+      #shot-07  { position: absolute; inset: 0; z-index: 7; }
+      #shot-08  { position: absolute; inset: 0; z-index: 8; }
+      #shot-09  { position: absolute; inset: 0; z-index: 9; }
+      #shot-10  { position: absolute; inset: 0; z-index: 10; }
+      #shot-11  { position: absolute; inset: 0; z-index: 11; }
+      #shot-12  { position: absolute; inset: 0; z-index: 12; }
+      #shot-13  { position: absolute; inset: 0; z-index: 13; }
+      /* film grade: soft vignette + a static SVG-turbulence grain (fixed seed — deterministic),
+         sitting above every shot. Subtle by design: it reads as texture, not noise. */
+      #grade { position: absolute; inset: 0; z-index: 20; pointer-events: none; }
+      #grade .vig { position: absolute; inset: 0;
+        background: radial-gradient(118% 96% at 50% 46%, rgba(0,0,0,0) 58%, rgba(2,5,12,.34) 100%); }
+      #grade .grain { position: absolute; inset: 0; opacity: .05; mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+        background-size: 240px 240px; }
+    </style>
+  </head>
+  <body>
+    <div id="air-root" data-composition-id="master" data-start="0" data-width="1920" data-height="1080" data-duration="103">
+
+      <!-- CLOUD SKY (WebGL fBm + light rays, 2D gradient fallback). One instance for the whole
+           film: it is the open (shots 01-02), it is hidden behind the opaque chapter shots
+           (03-10), and it returns as the closing sky (shots 11-13) as uProgress veils it. -->
+      <div id="sky"     data-composition-id="sky"                       data-composition-src="compositions/sky.html"                       data-start="0"     data-duration="103"  data-track-index="0"></div>
+
+      <!-- MUSIC — Passwords.mp3, the timing spine: every seam below sits on one of its
+           audiomap anchors (SURGE 6/51, phrase edges 13.77/25.33, hard stops 67/69,
+           near-silence 89-103). Volume lane rides the film: full through the beat-driven
+           chapters, a gentle shelf under the quiet backend act, out with the sky. -->
+      <audio id="bgm" class="clip" src="assets/bgm.mp3"
+             data-start="0" data-duration="103" data-track-index="14" data-volume="0.9"
+             data-automation="{&quot;version&quot;:1,&quot;lanes&quot;:[{&quot;target&quot;:&quot;volume&quot;,&quot;points&quot;:[{&quot;t&quot;:0,&quot;v&quot;:0},{&quot;t&quot;:0.35,&quot;v&quot;:1},{&quot;t&quot;:100.5,&quot;v&quot;:1},{&quot;t&quot;:103,&quot;v&quot;:0}]}]}"></audio>
+
+      <!-- ACT I — the promise, over the sky -->
+      <div id="shot-01" data-composition-id="shot-01-open"               data-composition-src="compositions/shot-01-open.html"               data-start="0"     data-duration="6"    data-track-index="1"></div>
+      <div id="shot-02" data-composition-id="shot-02-kinetic"           data-composition-src="compositions/shot-02-kinetic.html"           data-start="6"     data-duration="7.8"    data-track-index="2"></div>
+
+      <!-- ACT II — what the agent is given, then the six chapters -->
+      <div id="shot-03" data-composition-id="shot-03-endowments"        data-composition-src="compositions/shot-03-endowments.html"        data-start="13.8"  data-duration="11.5"  data-track-index="3"></div>
+      <div id="shot-04" data-composition-id="shot-04-hyperpersonalization" data-composition-src="compositions/shot-04-hyperpersonalization.html" data-start="25.3"  data-duration="7.7"  data-track-index="4"></div>
+      <div id="shot-05" data-composition-id="shot-05-import-context"    data-composition-src="compositions/shot-05-import-context.html"    data-start="33"    data-duration="7.5"  data-track-index="5"></div>
+      <div id="shot-06" data-composition-id="shot-06-connect-apps"      data-composition-src="compositions/shot-06-connect-apps.html"      data-start="40.5"  data-duration="8"  data-track-index="6"></div>
+      <div id="shot-07" data-composition-id="shot-07-composable-computer" data-composition-src="compositions/shot-07-composable-computer.html" data-start="48.5"  data-duration="7.5"  data-track-index="7"></div>
+      <div id="shot-08" data-composition-id="shot-08-knowledge-work"    data-composition-src="compositions/shot-08-knowledge-work.html"    data-start="56"    data-duration="7.5"    data-track-index="8"></div>
+      <div id="shot-09" data-composition-id="shot-09-remote-control"    data-composition-src="compositions/shot-09-remote-control.html"    data-start="63.5"  data-duration="5.5"    data-track-index="9"></div>
+
+      <!-- ACT III — the backend, then back to the sky to close -->
+      <div id="shot-10" data-composition-id="shot-10-guardian-angel"    data-composition-src="compositions/shot-10-guardian-angel.html"    data-start="69"    data-duration="12"   data-track-index="10"></div>
+      <div id="shot-11" data-composition-id="shot-11-yours"             data-composition-src="compositions/shot-11-yours.html"             data-start="81"    data-duration="8"  data-track-index="11"></div>
+      <div id="shot-12" data-composition-id="shot-12-guardian"          data-composition-src="compositions/shot-12-guardian.html"          data-start="89"    data-duration="7"    data-track-index="12"></div>
+      <div id="shot-13" data-composition-id="shot-13-endcard"           data-composition-src="compositions/shot-13-endcard.html"           data-start="96"    data-duration="7"    data-track-index="13"></div>
+
+      <!-- GRADE — vignette + static grain over the whole film -->
+      <div id="grade" class="clip" data-start="0" data-duration="103" data-track-index="15">
+        <div class="vig"></div>
+        <div class="grain"></div>
+      </div>
+
+    </div>
+
+    <script>
+      // Master timeline. Every seam is a hard cut: the outgoing shot is still travelling LEFT
+      // (power4.in, -230px) when the cut lands and the incoming shot picks the same vector up
+      // mid-flight (power4.out, +230px -> 0) inside its own composition. The only dissolve in
+      // the film is shot 12 -> shot 13, and it is carried by the continuous sky underneath.
+      window.__timelines = window.__timelines || {};
+      const rootTimeline = gsap.timeline({ paused: true });
+      // shot 13 fades up over the still-visible sky as shot 12's payoff dissolves out
+      rootTimeline.set("#shot-13", { opacity: 0 }, 0);
+      rootTimeline.to("#shot-13", { opacity: 1, duration: 0.42, ease: "power1.inOut" }, 96);
+      window.__timelines["master"] = rootTimeline;
+    </script>
+  </body>
+</html>

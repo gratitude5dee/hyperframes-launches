@@ -1,0 +1,110 @@
+<template id="shot-13-endcard-template">
+  <div id="s13-root" data-composition-id="shot-13-endcard" data-width="1920" data-height="1080" data-duration="7">
+    <style>
+      @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
+        src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
+
+      #s13-root{position:relative;width:1920px;height:1080px;overflow:hidden;background:transparent;
+        font-family:'Inter var',system-ui,sans-serif;color:#F4F8FF;
+        -webkit-font-smoothing:antialiased}
+      #s13-root *,#s13-root *::before,#s13-root *::after{box-sizing:border-box}
+
+      #s13-root .frame{position:absolute;inset:0}
+      #s13-root .scrim{position:absolute;inset:0;background:
+        radial-gradient(78% 70% at 50% 46%,rgba(4,8,18,.46) 0%,rgba(4,8,18,.82) 100%)}
+
+      #s13-root .lockup{position:absolute;left:0;right:0;top:126px;text-align:center}
+      #s13-root .lockup .mark{display:flex;justify-content:center;align-items:center;gap:22px}
+      #s13-root .lockup .mark img{width:76px;height:76px;display:block}
+      #s13-root .lockup .mark b{font-size:96px;font-weight:600;letter-spacing:-.05em;line-height:1}
+      #s13-root .built{margin-top:34px;font-size:38px;font-weight:500;letter-spacing:-.01em;
+        color:rgba(236,243,255,.94);display:flex;justify-content:center;align-items:center;gap:16px}
+      #s13-root .built img{width:40px;height:40px;display:block}
+      /* supplied WZRD.tech chrome blackletter mark */
+      #s13-root .built img.wzrd{width:auto;height:42px;
+        filter:brightness(1.55) contrast(1.05) drop-shadow(0 0 14px rgba(150,190,255,.55)) drop-shadow(0 8px 22px rgba(3,10,26,.55))}
+      /* supplied Onairos gradient-silhouette mark */
+      #s13-root .plate img.onairos{border-radius:50%;object-fit:cover;object-position:50% 18%}
+      #s13-root .partners{margin-top:30px;font-size:24px;font-weight:550;letter-spacing:.32em;
+        text-transform:uppercase;color:rgba(198,214,246,.72)}
+
+      #s13-root .wall{position:absolute;left:130px;right:130px;top:508px;display:flex;flex-wrap:wrap;
+        justify-content:center;gap:26px}
+      #s13-root .plate{width:388px;height:150px;border-radius:28px;display:flex;align-items:center;gap:24px;
+        padding:0 30px;background:linear-gradient(180deg,rgba(255,255,255,.11),rgba(255,255,255,.04));
+        border:1px solid rgba(255,255,255,.18);
+        box-shadow:0 30px 64px -28px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.3);
+        backdrop-filter:blur(12px);will-change:transform}
+      #s13-root .plate img{width:64px;height:64px;display:block;flex:0 0 auto}
+      #s13-root .plate b{font-size:31px;font-weight:600;letter-spacing:-.02em}
+    </style>
+
+    <div class="frame clip" id="s13-frame" data-layout-allow-overflow data-start="0" data-duration="7" data-track-index="1">
+      <div class="scrim" id="s13-scrim"></div>
+
+      <div class="lockup">
+        <div class="mark" id="s13-mark"><img src="logos/air.svg" alt=""><b>air</b></div>
+        <div class="built" id="s13-built"><img src="logos/zaps.svg" alt="">Built on Zaps by <img class="wzrd" src="logos/wzrdtech-chrome.png" alt="WZRD.tech"></div>
+        <div class="partners" id="s13-partners">in partnership with</div>
+      </div>
+
+      <div class="wall" id="s13-wall">
+        <div class="plate" data-plate><img class="onairos" src="logos/onairos-avatar.png" alt=""><b>Onairos</b></div>
+        <div class="plate" data-plate><img src="logos/tenkicloud.svg" alt=""><b>TenkiCloud</b></div>
+        <div class="plate" data-plate><img src="logos/box.svg" alt=""><b>Box</b></div>
+        <div class="plate" data-plate><img src="logos/gmicloud.svg" alt=""><b>GMICloud</b></div>
+        <div class="plate" data-plate><img src="logos/onepassword.svg" alt=""><b>1Password</b></div>
+        <div class="plate" data-plate><img src="logos/hudrl.svg" alt=""><b>HUD RL</b></div>
+        <div class="plate" data-plate><img src="logos/cognition.svg" alt=""><b>Cognition</b></div>
+        <div class="plate" data-plate><img src="logos/mongodb.svg" alt=""><b>MongoDB</b></div>
+        <div class="plate" data-plate><img src="logos/vercel.svg" alt=""><b>Vercel</b></div>
+        <div class="plate" data-plate><img src="logos/anthropic.svg" alt=""><b>Anthropic</b></div>
+        <div class="plate" data-plate><img src="logos/openai.svg" alt=""><b>OpenAI</b></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+    (function(){
+      var root = document.querySelector('[data-composition-id="shot-13-endcard"]');
+      var frame = root.querySelector('#s13-frame');
+      var scrim = root.querySelector('#s13-scrim');
+      var mark = root.querySelector('#s13-mark');
+      var built = root.querySelector('#s13-built');
+      var partners = root.querySelector('#s13-partners');
+      var plates = root.querySelectorAll('#s13-wall .plate');
+      var EO = 'expo.out';
+
+      gsap.set(scrim,{opacity:0});
+      gsap.set(mark,{scale:1.12,opacity:0,transformOrigin:'50% 50%'});
+      gsap.set([built,partners],{y:34,opacity:0});
+      gsap.set(plates,{y:64,opacity:0,scale:.94,transformOrigin:'50% 100%'});
+
+      var tl = gsap.timeline({paused:true,defaults:{ease:EO}});
+
+      // the sky stays; only the end card resolves on top of it
+      tl.to(scrim,{opacity:1,duration:.9,ease:'power2.out'},0);
+      // inverse-zoom arrival for the lockup: it retracts into the focal plane
+      tl.to(mark,{scale:1,opacity:1,duration:1.0},.16);
+      tl.to(built,{y:0,opacity:1,duration:.8},.70);
+      tl.to(partners,{y:0,opacity:1,duration:.7},1.02);
+
+      // partner wall: a cascade with shrinking gaps, resolving into a still frame
+      var at = 1.40, gap = .13;
+      for (var i = 0; i < plates.length; i++){
+        tl.to(plates[i],{y:0,opacity:1,scale:1,duration:.66},at);
+        at += gap; gap *= .95;
+      }
+
+      // final seconds: the frame holds dead still and lets the sky carry the last beat
+      tl.to({},{duration:.4},6.60);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["shot-13-endcard"] = tl;
+      var q = new URLSearchParams(location.search);
+      if(q.has('t')){ tl.seek(parseFloat(q.get('t'))||0); }
+      else if(q.get('dev')==='1'){ tl.play(); }
+    })();
+    </script>
+  </div>
+</template>

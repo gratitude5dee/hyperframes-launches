@@ -1,0 +1,173 @@
+<template id="shot-09-remote-control-template">
+  <div id="s09-root" data-composition-id="shot-09-remote-control" data-width="1920" data-height="1080" data-duration="5.5">
+    <style>
+      @font-face{font-family:'Inter var';font-weight:100 900;font-style:normal;font-display:block;
+        src:url(fonts/Inter-latin-variable.woff2) format('woff2')}
+
+      #s09-root{position:relative;width:1920px;height:1080px;overflow:hidden;background:#050810;
+        font-family:'Inter var',system-ui,sans-serif;color:#EDF3FF;
+        -webkit-font-smoothing:antialiased}
+      #s09-root *,#s09-root *::before,#s09-root *::after{box-sizing:border-box}
+
+      #s09-root .frame{position:absolute;inset:0;background:
+        radial-gradient(56% 56% at 66% 50%,rgba(56,116,196,.30) 0%,rgba(5,8,16,0) 70%),
+        radial-gradient(46% 40% at 10% 20%,rgba(112,84,208,.22) 0%,rgba(5,8,16,0) 74%),
+        #050810}
+
+      #s09-root .head{position:absolute;left:150px;top:120px;width:1620px}
+      #s09-root .num{font-size:26px;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:#A9C6FF}
+      #s09-root .title{margin-top:22px;font-size:74px;font-weight:600;letter-spacing:-.038em;line-height:1.06;
+        max-width:1300px}
+
+      /* remote control — drawn in CSS, no bitmap */
+      #s09-root .remote{position:absolute;left:210px;top:390px;width:260px;height:560px;border-radius:64px;
+        padding:36px 30px;background:linear-gradient(180deg,rgba(255,255,255,.20),rgba(255,255,255,.06));
+        border:1px solid rgba(255,255,255,.28);
+        box-shadow:0 60px 110px -34px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.5);
+        backdrop-filter:blur(14px);will-change:transform}
+      #s09-root .remote .lens{width:56px;height:56px;margin:0 auto;border-radius:50%;
+        background:radial-gradient(circle at 50% 40%,rgba(190,220,255,.95),rgba(60,110,190,.5));
+        box-shadow:0 0 26px rgba(150,200,255,.5)}
+      #s09-root .remote .pad{position:relative;width:180px;height:180px;margin:38px auto 0;border-radius:50%;
+        border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.07)}
+      #s09-root .remote .pad i{position:absolute;left:50%;top:50%;width:56px;height:56px;margin:-28px 0 0 -28px;
+        border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.5),rgba(200,220,255,.24));
+        box-shadow:inset 0 1px 0 rgba(255,255,255,.6)}
+      #s09-root .remote .btn{height:52px;margin-top:22px;border-radius:26px;background:rgba(255,255,255,.09);
+        border:1px solid rgba(255,255,255,.20);will-change:transform}
+
+      #s09-root .mesh{position:absolute;left:560px;top:250px;width:1280px;height:760px}
+      #s09-root .wires{position:absolute;left:0;top:0;width:1280px;height:760px}
+      #s09-root .node{position:absolute;width:104px;height:104px;margin:-52px 0 0 -52px;border-radius:50%;
+        display:grid;place-items:center;background:rgba(255,255,255,.07);
+        border:1px solid rgba(255,255,255,.18);will-change:transform}
+      #s09-root .node img{width:48px;height:48px;display:block;opacity:.9}
+      #s09-root .node .glow{position:absolute;inset:-10px;border-radius:50%;
+        box-shadow:0 0 46px rgba(150,200,255,.85),inset 0 0 26px rgba(150,200,255,.5);
+        border:1px solid rgba(190,220,255,.7)}
+      #s09-root .core{position:absolute;width:180px;height:180px;margin:-90px 0 0 -90px;border-radius:50%;
+        display:grid;place-items:center;
+        background:radial-gradient(circle at 50% 36%,rgba(160,200,255,.5),rgba(18,30,64,.92));
+        border:1px solid rgba(190,220,255,.5);
+        box-shadow:0 40px 90px -30px rgba(40,90,200,.75),inset 0 1px 0 rgba(255,255,255,.4)}
+      #s09-root .core img{width:88px;height:88px;display:block}
+      #s09-root .cap{position:absolute;left:0;bottom:-4px;width:1280px;text-align:center;font-size:29px;
+        font-weight:550;color:rgba(228,238,255,.9)}
+    </style>
+
+    <div class="frame clip" id="s09-frame" data-layout-allow-overflow data-start="0" data-duration="5.5" data-track-index="1">
+      <div class="head">
+        <div class="num" id="s09-num">6) One remote</div>
+        <div class="title" id="s09-title">air is your remote control for hyperpersonal agents.</div>
+      </div>
+
+      <div class="remote" id="s09-remote">
+        <div class="lens"></div>
+        <div class="pad"><i></i></div>
+        <div class="btn" data-btn></div>
+        <div class="btn" data-btn></div>
+      </div>
+
+      <div class="mesh">
+        <svg class="wires" id="s09-wires" viewBox="0 0 1280 760" fill="none" aria-hidden="true"></svg>
+        <div class="core" id="s09-core" style="left:250px;top:380px"><img src="logos/air.svg" alt=""></div>
+        <div class="cap" id="s09-cap">one remote, a mesh of agents working in parallel</div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <script>
+    (function(){
+      var root = document.querySelector('[data-composition-id="shot-09-remote-control"]');
+      var frame = root.querySelector('#s09-frame');
+      var head = [root.querySelector('#s09-num'),root.querySelector('#s09-title')];
+      var remote = root.querySelector('#s09-remote');
+      var btns = root.querySelectorAll('#s09-remote .btn');
+      var pad = root.querySelector('#s09-remote .pad i');
+      var mesh = root.querySelector('.mesh');
+      var svg = root.querySelector('#s09-wires');
+      var core = root.querySelector('#s09-core');
+      var cap = root.querySelector('#s09-cap');
+      var SVGNS = 'http://www.w3.org/2000/svg';
+      var EO = 'expo.out';
+
+      // fixed mesh geometry: a core plus 11 agent nodes on two arcs
+      var CX = 250, CY = 380;
+      var spec = [
+        [560,120],[760,236],[930,140],[1096,268],[1180,470],
+        [1020,610],[820,690],[620,590],[470,690],[430,180],[700,420]
+      ];
+      var nodes = [], wires = [];
+      for (var i = 0; i < spec.length; i++){
+        var n = document.createElement('div');
+        n.className = 'node';
+        n.style.left = spec[i][0] + 'px';
+        n.style.top = spec[i][1] + 'px';
+        n.innerHTML = '<img src="logos/onairos.svg" alt=""><div class="glow"></div>';
+        mesh.appendChild(n);
+        nodes.push(n);
+
+        var mx = (CX + spec[i][0]) / 2, my = Math.min(CY, spec[i][1]) - 70;
+        var p = document.createElementNS(SVGNS,'path');
+        p.setAttribute('d','M'+CX+' '+CY+' Q '+mx+' '+my+' '+spec[i][0]+' '+spec[i][1]);
+        p.setAttribute('stroke','rgba(160,200,255,.5)');
+        p.setAttribute('stroke-width','2');
+        p.setAttribute('fill','none');
+        svg.appendChild(p);
+        wires.push(p);
+      }
+      var glows = root.querySelectorAll('.node .glow');
+
+      gsap.set(head,{y:52,opacity:0});
+      gsap.set(remote,{x:-260,opacity:0});
+      gsap.set(core,{scale:.5,opacity:0,transformOrigin:'50% 50%'});
+      gsap.set(nodes,{scale:.4,opacity:0,transformOrigin:'50% 50%'});
+      gsap.set(glows,{opacity:0});
+      gsap.set(cap,{y:24,opacity:0});
+      wires.forEach(function(p){
+        var L = p.getTotalLength ? p.getTotalLength() : 600;
+        gsap.set(p,{strokeDasharray:L,strokeDashoffset:L});
+      });
+
+      var tl = gsap.timeline({paused:true,defaults:{ease:EO}});
+      tl.fromTo(frame,{x:230,opacity:.35},{x:0,opacity:1,duration:.34,ease:'power4.out',immediateRender:false},0);
+      head.forEach(function(el,i){ tl.to(el,{y:0,opacity:1,duration:.7},.08 + i*.11); });
+
+      tl.to(remote,{x:0,opacity:1,duration:.95},.44);
+      tl.to(core,{scale:1,opacity:1,duration:.9},.86);
+
+      // press: the pad depresses, the signal runs the wires, each agent wakes in turn
+      tl.to(pad,{scale:.88,duration:.10,ease:'power2.in'},1.10);
+      tl.to(pad,{scale:1,duration:.5,overwrite:'auto'},1.20);
+      tl.to(btns[0],{backgroundColor:'rgba(190,220,255,.5)',duration:.14,ease:'power2.in'},1.10);
+      tl.to(btns[0],{backgroundColor:'rgba(255,255,255,.09)',duration:.9},1.34);
+
+      nodes.forEach(function(n,i){
+        var at = 1.34 + i*.14;
+        tl.to(wires[i],{strokeDashoffset:0,duration:.44,ease:'power2.inOut'},at);
+        tl.to(n,{scale:1,opacity:1,duration:.5},at+.14);
+        tl.to(glows[i],{opacity:1,duration:.3},at+.3);
+        tl.to(glows[i],{opacity:.28,duration:.7},at+.64);
+      });
+
+      // second press lands on the track's 67s hard stop (63.5 + 3.5): the whole mesh
+      // answers at once, then the frame FREEZES dead still until the 69s cut
+      tl.to(pad,{scale:.9,duration:.10,ease:'power2.in'},3.50);
+      tl.to(pad,{scale:1,duration:.5,overwrite:'auto'},3.60);
+      tl.to(btns[1],{backgroundColor:'rgba(190,220,255,.5)',duration:.14,ease:'power2.in'},3.50);
+      tl.to(btns[1],{backgroundColor:'rgba(255,255,255,.09)',duration:.9},3.74);
+      tl.to(glows,{opacity:.9,duration:.4,stagger:.02},3.66);
+      tl.to(cap,{y:0,opacity:1,duration:.6},3.84);
+
+      tl.to(frame,{x:-230,duration:.34,ease:'power4.in'},5.16);
+      tl.to(frame,{opacity:0,duration:.20,ease:'none'},5.28);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["shot-09-remote-control"] = tl;
+      var q = new URLSearchParams(location.search);
+      if(q.has('t')){ tl.seek(parseFloat(q.get('t'))||0); }
+      else if(q.get('dev')==='1'){ tl.play(); }
+    })();
+    </script>
+  </div>
+</template>
